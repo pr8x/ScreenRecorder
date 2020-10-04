@@ -8,9 +8,27 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Button Content="Start " Click="StartRecording"/>
-        <Button Content="Stop " Click="StopRecoring" Margin="230,289,0,0" VerticalAlignment="Top"/>
+    <Page.DataContext>
+        <local:MainPageViewModel />
+    </Page.DataContext>
 
-    </Grid>
+    <StackPanel Padding="20" Spacing="10">
+
+        <StackPanel.Resources>
+            <local:StringFormatConverter x:Key="SFC" />
+        </StackPanel.Resources>
+
+        <TextBlock Text="{Binding RecordingTime, 
+                        Converter={StaticResource SFC},
+                        ConverterParameter='{}{0:hh\\:mm\\:ss\\.ff}'}"
+                   HorizontalAlignment="Center"
+                   FontSize="20" />
+
+        <Button Command="{Binding ToggleRecordingCommand}"
+                HorizontalAlignment="Center">
+            <Ellipse Width="15" Height="15" Fill="IndianRed" />
+        </Button>
+
+    </StackPanel>
+
 </Page>
